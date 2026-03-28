@@ -1,0 +1,15 @@
+🧠 Pro Tip (Very Important)
+
+For production:
+
+Use:
+
+secure=True
+
+Use:
+
+wss:// (not ws://)
+
+Set:
+
+SameSite=None

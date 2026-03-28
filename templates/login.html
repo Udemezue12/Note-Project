@@ -1,0 +1,108 @@
+{% extends "base.html" %} 
+{% load static %}
+{% block title %}Sign In — Mnemo{% endblock %} 
+{%block body %}
+<div class="auth-page">
+  <div class="auth-bg"></div>
+  <div class="auth-card">
+    <div class="auth-logo">Mn<em>e</em>mo</div>
+    <div class="auth-tagline">// your thoughts, encrypted &amp; synced</div>
+
+    <div
+      id="auth-response"
+      style="
+        display: none;
+        font-size: 0.72rem;
+        font-family: var(--mono);
+        padding: 8px 12px;
+        background: rgba(232, 81, 42, 0.1);
+        border: 1px solid rgba(232, 81, 42, 0.3);
+        border-radius: 4px;
+        margin-bottom: 12px;
+        color: var(--ember);
+      "
+    ></div>
+
+    <form
+      id="login-form"
+      hx-post="/api/v1/auth/login/"
+      hx-ext="json-enc"
+      hx-target="#auth-response"
+      hx-swap="innerHTML"
+      hx-on::before-request="beginLoginSubmit()"
+      hx-on::after-request="handleLoginResponse(event)"
+    >
+      {% csrf_token %}
+
+      <div class="auth-field">
+        <label class="auth-label" for="username">Username</label>
+        <input
+          class="auth-input"
+          id="username"
+          name="username"
+          type="text"
+          autocomplete="username"
+          required
+        />
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label" for="password">Password</label>
+        <div style="position: relative">
+          <input
+            class="auth-input"
+            id="password"
+            name="password"
+            type="password"
+            autocomplete="current-password"
+            placeholder="••••••••"
+            required
+          />
+          <button
+            type="button"
+            onclick="togglePassword()"
+            style="
+              position: absolute;
+              right: 10px;
+              top: 50%;
+              transform: translateY(-50%);
+              color: var(--mist);
+              font-size: 0.8rem;
+              padding: 4px;
+            "
+          >
+            👁
+          </button>
+        </div>
+      </div>
+
+      <div
+        style="display: flex; justify-content: flex-end; margin-bottom: 16px"
+      >
+        <a
+          href="{% url 'forgot_password' %}"
+          class="auth-link"
+          style="font-size: 0.7rem; font-family: var(--mono)"
+        >
+          forgot password?
+        </a>
+      </div>
+
+      <button type="submit" class="auth-submit" id="login-btn">
+        <span id="login-btn-text">Sign In</span>
+        <span class="spinner htmx-indicator" id="login-spinner"></span>
+      </button>
+    </form>
+
+    <div class="auth-divider">or</div>
+
+    <div class="auth-footer">
+      No account yet?
+      <a href="{% url 'register' %}" class="auth-link">Create one</a>
+    </div>
+  </div>
+</div>
+{% endblock %} {% block extra_scripts %}
+<script src="{% static 'js/login.js' %}"></script>
+
+{% endblock %}

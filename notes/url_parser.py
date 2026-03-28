@@ -1,0 +1,27 @@
+
+from typing import List
+
+
+class URLParser:
+    def parse_bool(self, value: str, default=False):
+        if value is None:
+            return default
+        return value.lower() in ["true", "1", "yes"]
+
+    def parsers_list(self, raw: str):
+        return [v.strip() for v in raw.split(",") if v.strip()]
+
+    def parse_url_list(self, raw_value: str, name: str) -> List[str]:
+        items = [v.strip() for v in raw_value.split(",") if v.strip()]
+
+        valid_items = [
+            v for v in items if v.startswith("http://") or v.startswith("https://")
+        ]
+
+        if not valid_items:
+            print(f"WARNING: No valid URLs found in {name}")
+
+        return valid_items
+
+
+parser = URLParser()

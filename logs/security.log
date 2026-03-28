@@ -1,0 +1,7 @@
+[2026-03-21 01:03:03,844] WARNING security BLOCKED IP=127.0.0.1 | REASON=Suspicious payload | PATH=/admin/login/ | UA=Mozilla/5.0 (Windows NT 10.0; Win64; x64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/146.0.0.0 Safari/537.36
+[2026-03-21 01:04:45,783] WARNING security Blocked IP tried access: 127.0.0.1
+[2026-03-21 01:04:53,555] WARNING security Blocked IP tried access: 127.0.0.1
+[2026-03-21 01:05:04,819] WARNING security Blocked IP tried access: 127.0.0.1
+[2026-03-21 01:06:48,308] WARNING security Blocked IP tried access: 127.0.0.1
+[2026-03-21 01:06:53,478] WARNING security Blocked IP tried access: 127.0.0.1
+[2026-03-21 01:08:51,652] WARNING security Blocked IP tried access: 127.0.0.1

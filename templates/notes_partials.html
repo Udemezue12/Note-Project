@@ -1,0 +1,56 @@
+{% comment %}
+  partials/note_card.html
+  Used for HTMX partial swaps — renders a single note card.
+  Context: note, tag (optional), is_pending (bool)
+{% endcomment %}
+
+<div class="note-card{% if is_active %} active{% endif %}{% if is_pending %} offline-pending{% endif %}"
+  data-note-id="{{ note.id }}"
+  onclick="openNote('{{ note.id }}')"
+  id="note-card-{{ note.id }}">
+  <div class="note-card-tag" style="color:{{ tag.color|default:'var(--mist)' }}">
+    {{ note.tag.name|default:"—" }}
+  </div>
+  <div class="note-card-title">{{ note.title|default:"Untitled" }}</div>
+  <div class="note-card-preview">{{ note.content|truncatechars:80|default:"Empty note" }}</div>
+  <div class="note-card-meta">
+    <span class="note-card-date" data-iso="{{ note.updated_at|date:'c' }}">
+      {{ note.updated_at|timesince }} ago
+    </span>
+  </div>
+</div>
+
+
+{% comment %}
+  partials/note_list.html
+  Full note list fragment — used for HTMX list refresh.
+{% endcomment %}
+
+{% if notes %}
+  {% for note in notes %}
+    {% include "partials/note_card.html" with note=note tag=note.tag %}
+  {% endfor %}
+{% else %}
+  <div class="note-empty">
+    <div class="note-empty-icon">✦</div>
+    <div class="note-empty-text">No notes yet</div>
+  </div>
+{% endif %}
+
+
+{% comment %}
+  partials/tag_item.html
+  Single tag in sidebar — for HTMX oob swaps.
+{% endcomment %}
+
+<div class="tag-item" data-tag-id="{{ tag.id }}" onclick="selectTag('{{ tag.id }}', this)">
+  <span class="tag-dot" style="background:{{ tag.color|default:'var(--mist)' }}"></span>
+  <span style="flex:1">{{ tag.name }}</span>
+  <span class="tag-count">{{ tag.note_count|default:0 }}</span>
+  <div class="tag-actions">
+    <button class="tag-btn" title="Edit"
+      onclick="event.stopPropagation();editTag('{{ tag.id }}')">✎</button>
+    <button class="tag-btn" title="Delete"
+      onclick="event.stopPropagation();deleteTag('{{ tag.id }}')">✕</button>
+  </div>
+</div>

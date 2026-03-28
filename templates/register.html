@@ -1,0 +1,89 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Register — Mnemo{% endblock %}
+
+{% block body %}
+<div class="auth-page">
+  <div class="auth-bg"></div>
+  <div class="auth-card">
+    <div class="auth-logo">Mn<em>e</em>mo</div>
+    <div class="auth-tagline">// start writing what matters</div>
+
+    <div id="auth-response" style="display:none; font-size:0.72rem; font-family:var(--mono);
+         padding:8px 12px; border-radius:4px; margin-bottom:12px;"></div>
+
+    <form id="register-form"
+      hx-post="/api/auth/register/"
+      hx-ext="json-enc"
+      hx-target="#auth-response"
+      hx-swap="innerHTML"
+      hx-on::before-request="beginRegister()"
+      hx-on::after-request="handleRegisterResponse(event)">
+
+      {% csrf_token %}
+
+      <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px">
+        <div class="auth-field">
+          <label class="auth-label">First Name</label>
+          <input class="auth-input" name="first_name" type="text" placeholder="Ada" required />
+        </div>
+        <div class="auth-field">
+          <label class="auth-label">Last Name</label>
+          <input class="auth-input" name="last_name" type="text" placeholder="Lovelace" required />
+        </div>
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label">Username</label>
+        <input class="auth-input" name="username" type="text"
+          placeholder="ada_lovelace" autocomplete="username" required />
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label">Email</label>
+        <input class="auth-input" name="email" type="email"
+          placeholder="ada@example.com" autocomplete="email" required />
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label">Phone Number</label>
+        <input class="auth-input" name="phone_number" type="tel"
+          placeholder="+1 555 000 0000" />
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label">Password</label>
+        <input class="auth-input" id="reg-password" name="password"
+          type="password" placeholder="min. 8 characters" autocomplete="new-password" required />
+        <div id="password-strength" style="height:3px;margin-top:5px;border-radius:2px;
+          transition:all 0.3s;background:var(--ink-4);"></div>
+        <div id="password-strength-label"
+          style="font-size:0.6rem;font-family:var(--mono);color:var(--mist);margin-top:3px;"></div>
+      </div>
+
+      <div class="auth-field">
+        <label class="auth-label">Confirm Password</label>
+        <input class="auth-input" id="reg-confirm" name="confirm_password"
+          type="password" placeholder="••••••••" autocomplete="new-password" required />
+        <div id="confirm-match"
+          style="font-size:0.6rem;font-family:var(--mono);margin-top:3px;display:none;"></div>
+      </div>
+
+      <button type="submit" class="auth-submit" id="register-btn">
+        <span id="register-btn-text">Create Account</span>
+        <span class="spinner htmx-indicator"></span>
+      </button>
+    </form>
+
+    <div class="auth-footer">
+      Already have an account?
+      <a href="{% url 'login' %}" class="auth-link">← Back to sign in</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="{% static 'js/register.js' %}"></script>
+
+{% endblock %}

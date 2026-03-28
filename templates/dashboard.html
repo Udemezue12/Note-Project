@@ -1,0 +1,134 @@
+{% extends "base.html" %}
+{% load static %}
+{% block title %}Notes — Mnemo{% endblock %}
+
+{% block body %}
+<div class="app-shell">
+
+  <!-- ─── Top Bar ─────────────────────────────────────────── -->
+  <header class="topbar">
+    <div class="topbar-brand">Mn<em>e</em>mo</div>
+
+    <div class="sync-status" id="sync-status">
+      <span class="sync-dot"></span>
+      <span class="sync-label">offline</span>
+    </div>
+
+    <button class="btn-icon" title="Search" onclick="focusSearch()" style="font-size:0.85rem">⌕</button>
+
+    <div class="topbar-avatar" id="topbar-avatar" title="Account">—</div>
+
+    <button class="btn-icon" title="Logout" onclick="doLogout()"
+      style="font-family:var(--mono);font-size:0.65rem;color:var(--mist)">
+      ⏻
+    </button>
+  </header>
+
+  <!-- ─── Sidebar ────────────────────────────────────────── -->
+  <aside class="sidebar">
+    <div class="sidebar-section">Tags</div>
+
+    <div class="sidebar-search">
+      <span class="icon" style="font-size:0.8rem">⌕</span>
+      <input type="text" id="tag-search" placeholder="Filter tags…"
+        oninput="filterTags(this.value)" />
+    </div>
+
+    <div class="tag-nav" id="tag-nav">
+      <!-- All notes option -->
+      <div class="tag-item active" data-tag-id="all" onclick="selectTag('all', this)">
+        <span class="tag-dot" style="background:var(--mist)"></span>
+        <span>All Notes</span>
+        <span class="tag-count" id="all-count">0</span>
+      </div>
+    </div>
+
+    <div class="sidebar-divider"></div>
+
+    <div class="offline-queue" id="offline-queue">
+      <span>⚡</span>
+      <span><span class="count">0</span> pending sync</span>
+    </div>
+
+    <div class="sidebar-create-tag" onclick="openTagModal('create')">
+      + New Tag
+    </div>
+  </aside>
+
+  <!-- ─── Note List ───────────────────────────────────────── -->
+  <main class="note-list-pane">
+    <div class="note-list-header">
+      <div class="note-list-title" id="note-list-title">All Notes</div>
+      <button class="btn-new-note" onclick="openNewNote()">+ New</button>
+    </div>
+
+    <div class="sidebar-search" style="border-bottom:1px solid var(--ink-3);border-radius:0">
+      <span class="icon" style="font-size:0.8rem">⌕</span>
+      <input type="text" id="note-search" placeholder="Search notes…"
+        oninput="searchNotes(this.value)" style="background:transparent;border:none;border-radius:0;" />
+    </div>
+
+    <div class="note-list-body" id="note-list-body">
+      <!-- Populated by JS -->
+      <div class="note-empty">
+        <div class="note-empty-icon">✦</div>
+        <div class="note-empty-text">loading notes…</div>
+      </div>
+    </div>
+  </main>
+
+  <!-- ─── Editor ─────────────────────────────────────────── -->
+  <section class="editor-pane" id="editor-pane">
+    <div class="welcome-screen" id="welcome-screen">
+      <div class="welcome-title">Begin writing.</div>
+      <div class="welcome-sub">select a note or create a new one</div>
+    </div>
+
+    <div id="editor-container" style="display:none;flex:1;display:none;flex-direction:column;overflow:hidden;">
+      <div class="editor-toolbar">
+        <span class="editor-tag-badge" id="editor-tag-label">—</span>
+        <div class="editor-actions">
+          <button class="btn-icon" title="Change tag" onclick="openChangeTag()" style="font-size:0.75rem;font-family:var(--mono)">⊞ tag</button>
+          <button class="btn-icon danger" title="Delete note" onclick="deleteCurrentNote()">✕</button>
+        </div>
+      </div>
+
+      <div class="editor-body">
+        <input class="editor-title" id="editor-title"
+          type="text" placeholder="Untitled"
+          oninput="scheduleAutosave()" />
+        <textarea class="editor-content" id="editor-content"
+          placeholder="Start writing…"
+          oninput="updateWordCount(); scheduleAutosave()"></textarea>
+      </div>
+
+      <div class="editor-footer">
+        <span class="editor-wordcount" id="word-count">0 words</span>
+        <span class="auto-save-indicator" id="autosave-indicator">saved</span>
+        <button class="btn-save" id="save-btn" onclick="saveCurrentNote()">
+          <span id="save-btn-text">Save</span>
+          <span class="spinner htmx-indicator" id="save-spinner" style="width:12px;height:12px;border-width:1.5px"></span>
+        </button>
+      </div>
+    </div>
+  </section>
+</div>
+
+<!-- Tag change modal -->
+<div class="modal-backdrop" id="change-tag-modal">
+  <div class="modal">
+    <div class="modal-title">Change Tag</div>
+    <div id="change-tag-list" style="display:flex;flex-direction:column;gap:4px;max-height:240px;overflow-y:auto;"></div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="document.getElementById('change-tag-modal').classList.remove('open')">Cancel</button>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+
+<script src="{% static 'js/dashboard.js' %}"></script>
+
+
+{% endblock %}

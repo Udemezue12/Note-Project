@@ -1,0 +1,63 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>{% block title %}Mnemo — Notes{% endblock %}</title>
+
+  <!-- HTMX -->
+  <script src="https://unpkg.com/htmx.org@1.9.12/dist/htmx.min.js"></script>
+  <script src="https://unpkg.com/htmx.org@1.9.12/dist/ext/json-enc.js"></script>
+
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;1,9..144,300&family=DM+Mono:wght@300;400&family=Instrument+Sans:wght@400;500&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="{% static 'css/base.css' %}">
+
+  
+
+  {% block extra_head %}{% endblock %}
+</head>
+<body hx-ext="json-enc">
+
+<!-- Toast container -->
+<div class="toast-container" id="toast-container"></div>
+
+<!-- Tag modal -->
+<div class="modal-backdrop" id="tag-modal">
+  <div class="modal">
+    <div class="modal-title" id="tag-modal-title">New Tag</div>
+    <div class="modal-field">
+      <label class="modal-label">Tag Name</label>
+      <input class="modal-input" id="tag-name-input" type="text" placeholder="e.g. Research, Personal…" maxlength="40" />
+    </div>
+    <div class="modal-field">
+      <label class="modal-label">Color</label>
+      <div class="color-swatches" id="color-swatches">
+        <div class="color-swatch selected" data-color="#4a7c59" style="background:#4a7c59"></div>
+        <div class="color-swatch" data-color="#e8512a" style="background:#e8512a"></div>
+        <div class="color-swatch" data-color="#c9a84c" style="background:#c9a84c"></div>
+        <div class="color-swatch" data-color="#5b7fa6" style="background:#5b7fa6"></div>
+        <div class="color-swatch" data-color="#8a5b9c" style="background:#8a5b9c"></div>
+        <div class="color-swatch" data-color="#7a5c45" style="background:#7a5c45"></div>
+        <div class="color-swatch" data-color="#4a8a8a" style="background:#4a8a8a"></div>
+        <div class="color-swatch" data-color="#8a8a4a" style="background:#8a8a4a"></div>
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button class="btn-ghost" onclick="closeTagModal()">Cancel</button>
+      <button class="btn-primary" id="tag-modal-save" onclick="saveTag()">Create Tag</button>
+    </div>
+  </div>
+</div>
+
+{% block body %}{% endblock %}
+
+<script src="{% static 'js/base.js' %}"></script>
+
+
+{% block extra_scripts %}{% endblock %}
+</body>
+</html>
