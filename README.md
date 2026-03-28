@@ -1,14 +1,17 @@
-📒 Note_App
-<div align="center">
+<div align= "center">
+📒 NOTE APP
+</div>
+
 ⚡ Offline-First Intelligent Notes Application
 
 A secure, high-performance notes platform designed with an offline-first architecture, enabling users to create, edit, and manage notes without internet connectivity while automatically synchronizing with the backend when online.
 
 Built with Django, DRF, Celery, and modern authentication security, this application ensures data consistency, reliability, and seamless synchronization across offline and online environments.
 
+<div align= "center">
+🚀 OVERVIEW
+
 </div>
-🚀 Overview
-<div align="center">
 
 Note_App is a production-grade notes management system built with a strong focus on:
 
@@ -20,23 +23,29 @@ Note_App is a production-grade notes management system built with a strong focus
 
 Users can create notes even when offline, and once connectivity is restored, the system intelligently synchronizes local notes with the backend database.
 
+<div align= "center">
+🧠 KEY CONCEPT: OFFLINE-FIRST ARCHITECTURE
 </div>
-🧠 Key Concept: Offline-First Architecture
-<div align="center">
+
+
 
 The application uses a dual storage model:
 
-Mode	Storage Location
-📴 Offline	Browser Local Storage
-🌐 Online	Backend Database
+Mode Storage Location
+📴 Offline Browser Local Storage
+🌐 Online Backend Database
+
+<div align= "center">
+🧠OFFLINE WORKFLOW
 </div>
-Offline Workflow
 
 1️⃣ User creates a note while offline
 2️⃣ Note is stored in local storage
 3️⃣ A sync queue tracks unsynchronized notes
 
-Online Workflow
+<div align= "center">
+🧠ONLINE WORKFLOW
+</div>
 
 1️⃣ Internet connection becomes available
 2️⃣ Sync engine triggers background synchronization
@@ -45,8 +54,11 @@ Online Workflow
 
 Celery workers process synchronization tasks to ensure reliable and scalable syncing.
 
-✨ Features
-<div align="center">
+
+<div align= "center">
+✨ FEATURES
+</div>
+
 
 📓 Create, edit, and delete notes
 
@@ -70,8 +82,10 @@ Celery workers process synchronization tasks to ensure reliable and scalable syn
 
 🛡 Security hardened APIs
 
+<div align= "center">
+
+🏗 PROJECT STRUCTURE
 </div>
-🏗 Project Structure
 note_app/
 │
 ├── note_app/               # Django project
@@ -96,9 +110,11 @@ note_app/
 ├── docker-compose.yml
 ├── requirements.txt
 └── manage.py
-⚙️ Technology Stack
-<div align="center">
-Layer	Technology
+<div align= "center">
+⚙️ TECHNOLOGY STACK
+
+
+Layer Technology
 Backend	Django
 API	Django REST Framework
 Async Tasks	Celery
@@ -107,8 +123,11 @@ Database	PostgreSQL / SQLite
 Sync Engine	Custom JS Sync Queue
 Containerization	Docker
 Authentication	Secure Token Based Auth
+
+<div align= "center">
+
+🔐 SECURITY
 </div>
-🔐 Security
 
 The system implements strong authentication and security practices:
 
@@ -121,13 +140,15 @@ The system implements strong authentication and security practices:
 
 Security is designed to protect both online and offline data integrity.
 
-🔄 Synchronization Engine
-<div align="center">
+
+<div align= "center">
+
+🔄 SYNC ENGINE
+</div>
+
+
 
 The sync engine ensures data consistency between local storage and the server.
-
-</div>
-Responsibilities
 
 • Track unsynced notes
 • Retry failed requests
@@ -137,7 +158,9 @@ Responsibilities
 
 Celery handles backend processing for reliable synchronization.
 
-🐳 Docker Deployment
+<div align= "center">
+🐳 DOCKER DEPLOYMENT
+</div>
 
 The project is fully containerized for consistent deployment.
 
@@ -157,7 +180,9 @@ cd note_app
 python -m venv env
 source env/bin/activate
 
-Windows:
+<div align= "center">
+✨ PROJECT START
+</div>
 
 env\Scripts\activate
 3️⃣ Install Dependencies
@@ -170,30 +195,23 @@ python manage.py runserver
 celery -A note_app worker -l info
 📡 API Capabilities
 
-The API supports:
+<div align= "center">
+✨The API supports:
+</div>
 
-Action	Endpoint
-Create Note	/api/notes/
-Update Note	/api/notes/{id}
-Delete Note	/api/notes/{id}
-Sync Notes	/api/notes/sync
+Action Endpoint
+Create Note /api/notes/
+Update Note /api/notes/{id}
+Delete Note /api/notes/{id}
+Sync Notes /api/notes/sync
 
 All endpoints require authentication.
 
-🧪 Testing
 
-Run the test suite:
+<div align= "center">
 
-python manage.py test
-
-Tests cover:
-
-✔ Models
-✔ API endpoints
-✔ Sync logic
-✔ Authentication flows
-
-📊 Performance
+📊 PERFORMANCE
+</div>
 
 The application is optimized for:
 
@@ -202,7 +220,9 @@ The application is optimized for:
 ⚡ Reliable offline syncing
 ⚡ Scalable architecture
 
-🌍 Future Improvements
+<div align= "center">
+🌍 FUTURE IMPROVEMENTS
+</div>
 
 Planned enhancements:
 
@@ -214,7 +234,8 @@ Planned enhancements:
 📎 File attachments
 📝 Markdown support
 
-👨‍💻 Author
+
+
 <div align="center">
 
 Developed by
@@ -226,13 +247,19 @@ Full-Stack Developer specializing in
 Python • Django • Distributed Systems • Scalable Web Applications
 
 </div>
-📜 License
+<div align= "center">
+
+📜 LICENSE
+</div>
 <div align="center">
 
 This project is licensed under the MIT License.
 
 </div>
+<div align= "center">
+
 ⭐ Support the Project
+</div>
 <div align="center">
 
 If you find this project useful:
