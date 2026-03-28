@@ -1,7 +1,11 @@
 <div align= "center">
 📒 NOTE APP
+</div>
+<div align= "center">
+
 ⚡ Offline-First Intelligent Notes Application
 </div>
+
 
 
 
@@ -12,7 +16,9 @@ Built with Django, DRF, Celery, and modern authentication security, this applica
 
 <div align= "center">
 🚀 OVERVIEW
-Note_App is a production-grade notes management system built with a strong focus on:
+</div>
+<div align= "center">
+Note_App is a production-grade notes management system built with a strong focus on these listed below
 </div>
 
 
@@ -30,11 +36,7 @@ Users can create notes even when offline, and once connectivity is restored, the
 
 
 
-The application uses a dual storage model:
-
-Mode Storage Location
-📴 Offline Browser Local Storage
-🌐 Online Backend Database
+The application uses a dual storage model:Mode Storage Location, Offline Browser Local Storage, Online Backend Database
 
 <div align= "center">
 🧠OFFLINE WORKFLOW
@@ -128,9 +130,11 @@ Authentication	Secure Token Based Auth
 
 <div align= "center">
 🔐 SECURITY
-The system implements strong authentication and security practices which are listed below
 </div>
+<div align= "center">
+The system implements strong authentication and security practices which are listed below
 
+</div>
 
 ✔ Secure token-based authentication
 ✔ Protected API endpoints
@@ -161,9 +165,11 @@ Celery handles backend processing for reliable synchronization.
 
 <div align= "center">
 🐳 DOCKER DEPLOYMENT
-The project is fully containerized for consistent deployment.
 </div>
+<div align= "center">
+The project is fully containerized for consistent deployment.
 
+</div>
 
 Build the Image
 docker build -t note_app .
